@@ -1,10 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { householdDB } from "../../fakeDb";
+import { getHouseholds } from "../../../lib/household";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case "GET": {
-      return res.status(200).json(householdDB);
+      const households = await getHouseholds();
+      return res.status(200).json(households);
     }
 
     case "POST": {
