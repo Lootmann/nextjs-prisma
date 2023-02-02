@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .table {
+    @apply border-collapse border-2 border-spacing-2 border-slate-600 rounded-md;
+  }
+
+  .tr {
+    @apply border border-slate-500 rounded-md;
+  }
+
+  .th {
+    @apply border-2 border-slate-500 px-3;
+  }
+
+  .td {
+    @apply px-4;
+  }
+}

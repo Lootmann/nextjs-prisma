@@ -1,9 +1,15 @@
 import React from "react";
-import { getCategories, getHouseholds } from "../api/category";
+import axios from "axios";
+import { CategoryType, HouseholdType } from "../type";
 
 export default async function Page() {
-  const categories = await getCategories();
-  const households = await getHouseholds();
+  async function getHouseholds() {
+    const url = "http://localhost:3000/api/households";
+    const res = await axios.get(url);
+    return res.data;
+  }
+
+  const households: HouseholdType[] = await getHouseholds();
 
   return (
     <div>
@@ -12,27 +18,25 @@ export default async function Page() {
       <div className="p-2 bg-slate-300 gap-3">
         <h2>Households List</h2>
 
-        <div className="flex">
-          <div className="flex-1 text-md m-2 p-2 border-2 border-slate-700 rounded-md">
-            <ul>
-              {categories.map((c) => (
-                <li key={c.id}>
-                  {c.id}, {c.name}
-                </li>
-              ))}
-            </ul>
-          </div>
+        <table className="table-auto table">
+          <thead>
+            <tr className="tr uppercase">
+              <th className="th">id</th>
+              <th className="th">Category Name</th>
+              <th className="th">Amount</th>
+            </tr>
+          </thead>
 
-          <div className="flex-1 text-md m-2 p-2 border-2 border-slate-700 rounded-md">
-            <ul>
-              {households.map((h) => (
-                <li key={h.id}>
-                  {h.id} Amount: {h.amount}, Category.Name: {h.category.name}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+          <tbody>
+            {households.map((household) => (
+              <tr key={household.id} className="tr">
+                <td className="td">{household.id}</td>
+                <td className="td">{household.category.name}</td>
+                <td className="td">{household.amount}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
