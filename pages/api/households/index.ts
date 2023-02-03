@@ -1,5 +1,6 @@
+// api/households/index.ts
 import { NextApiRequest, NextApiResponse } from "next";
-import { getHouseholds } from "../../../lib/household";
+import { getHouseholds, createHousehold } from "../../../lib/household";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
@@ -9,7 +10,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     case "POST": {
-      return res.status(302).json({ msg: "Posted :^)" });
+      const { amount, categoryId } = req.body;
+      await createHousehold(amount, categoryId);
+      return res.redirect(302, "http://localhost:3000/");
     }
 
     default: {

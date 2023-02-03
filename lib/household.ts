@@ -9,3 +9,20 @@ export const getHouseholds = async () => {
     return { error };
   }
 };
+
+export const createHousehold = async (amount: number, categoryId: number) => {
+  try {
+    return await prisma.household.create({
+      data: {
+        amount: amount,
+        category: {
+          connect: {
+            id: categoryId,
+          },
+        },
+      },
+    });
+  } catch (error) {
+    return { error };
+  }
+};
