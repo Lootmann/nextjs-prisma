@@ -15,9 +15,7 @@ export default async function Page() {
     <div>
       <h2 className="mb-6 font-bold border-b-2 border-gray-800">Households</h2>
 
-      <div className="p-2 bg-slate-300 gap-3">
-        <h2>Households List</h2>
-
+      <div className="p-2 bg-slate-300 text-xl gap-3">
         <table className="table-auto table">
           <thead>
             <tr className="tr uppercase">
